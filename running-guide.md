@@ -1,40 +1,40 @@
 # Running the Library Management System
 
-This guide explains how to run both the monolithic and microservices versions of the Library Management System.
+Panduan ini menjelaskan cara menjalankan versi monolitik dan microservices dari Sistem Manajemen Perpustakaan.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
+Sebelum memulai, pastikan Anda telah menginstal hal-hal berikut:
 
-- [Node.js](https://nodejs.org/) (v14 or higher)
-- [MongoDB](https://www.mongodb.com/try/download/community) (v4 or higher)
-- [Docker](https://www.docker.com/products/docker-desktop/) and [Docker Compose](https://docs.docker.com/compose/install/) (optional, for running microservices with containers)
-- [Git](https://git-scm.com/downloads) (for cloning the repository)
+- [Node.js](https://nodejs.org/) (v14 atau lebih tinggi)
+- [MongoDB](https://www.mongodb.com/try/download/community) (v4 atau lebih tinggi)
+- [Docker](https://www.docker.com/products/docker-desktop/) dan [Docker Compose](https://docs.docker.com/compose/install/) (opsional, untuk menjalankan microservices dengan container)
+- [Git](https://git-scm.com/downloads) (untuk mengkloning repositori)
 
 ## Running the Monolithic Application
 
-The monolithic application is a single Node.js application that handles all functionality.
+Aplikasi monolitik adalah aplikasi Node.js tunggal yang menangani semua fungsionalitas.
 
-1. Navigate to the monolithic application directory:
+1. Pindah ke direktori aplikasi monolitik:
 
    ```bash
    cd d:\Web Development\pemrograman-web-lanjut\tugas\library-monolith
    ```
 
-2. Install the dependencies:
+2. Instal dependensi:
 
    ```bash
    npm install
    ```
 
-3. Make sure MongoDB is running:
+3. Pastikan MongoDB berjalan:
 
    ```bash
-   # Start MongoDB (command may vary based on your installation)
+   # Mulai MongoDB (perintah mungkin berbeda berdasarkan instalasi Anda)
    mongod
    ```
 
-4. Create a `.env` file in the root directory with the following content:
+4. Buat file `.env` di direktori root dengan konten berikut:
 
    ```
    PORT=3000
@@ -42,58 +42,58 @@ The monolithic application is a single Node.js application that handles all func
    JWT_SECRET=your_jwt_secret_key
    ```
 
-5. Start the application:
+5. Mulai aplikasi:
 
    ```bash
    npm run dev
    ```
 
-6. Access the application in your browser at:
+6. Akses aplikasi di browser Anda di:
    ```
    http://localhost:3000
    ```
 
 ## Running the Microservices Application
 
-The microservices version consists of multiple services that need to be run either individually or using Docker Compose.
+Versi microservices terdiri dari beberapa layanan yang perlu dijalankan secara individual atau menggunakan Docker Compose.
 
-### Option 1: Using Docker Compose (Recommended)
+### Option 1: Menggunakan Docker Compose (Direkomendasikan)
 
-1. Navigate to the microservices directory:
+1. Pindah ke direktori microservices:
 
    ```bash
    cd d:\Web Development\pemrograman-web-lanjut\tugas\library-microservices
    ```
 
-2. Run all services using Docker Compose:
+2. Jalankan semua layanan menggunakan Docker Compose:
 
    ```bash
    docker-compose up
    ```
 
-   This will start all services, including MongoDB, in separate containers.
+   Ini akan memulai semua layanan, termasuk MongoDB, dalam container terpisah.
 
-3. Access the API Gateway in your browser at:
+3. Akses API Gateway di browser Anda di:
 
    ```
    http://localhost:3000
    ```
 
-4. To stop all services, press `Ctrl+C` in the terminal where Docker Compose is running, or run:
+4. Untuk menghentikan semua layanan, tekan `Ctrl+C` di terminal tempat Docker Compose berjalan, atau jalankan:
    ```bash
    docker-compose down
    ```
 
-### Option 2: Running Services Individually
+### Option 2: Menjalankan Layanan Secara Individual
 
-1. Make sure MongoDB is running:
+1. Pastikan MongoDB berjalan:
 
    ```bash
-   # Start MongoDB
+   # Mulai MongoDB
    mongod
    ```
 
-2. Set up and start each service in separate terminal windows:
+2. Siapkan dan mulai setiap layanan di jendela terminal terpisah:
 
    **Terminal 1 - User Service:**
 
@@ -127,18 +127,18 @@ The microservices version consists of multiple services that need to be run eith
    npm run dev
    ```
 
-3. Access the API Gateway in your browser at:
+3. Akses API Gateway di browser Anda di:
    ```
    http://localhost:3000
    ```
 
 ## Testing the API
 
-You can test the API endpoints using tools like [Postman](https://www.postman.com/downloads/) or [curl](https://curl.se/).
+Anda dapat menguji endpoint API menggunakan alat seperti [Postman](https://www.postman.com/downloads/) atau [curl](https://curl.se/).
 
-### Example API Requests
+### Contoh Permintaan API
 
-#### User Registration
+#### Pendaftaran Pengguna
 
 ```http
 POST http://localhost:3000/api/users/register
@@ -151,7 +151,7 @@ Content-Type: application/json
 }
 ```
 
-#### User Login
+#### Login Pengguna
 
 ```http
 POST http://localhost:3000/api/users/login
@@ -163,13 +163,13 @@ Content-Type: application/json
 }
 ```
 
-#### Get All Books
+#### Mendapatkan Semua Buku
 
 ```http
 GET http://localhost:3000/api/books
 ```
 
-#### Add a Book (Admin only)
+#### Menambah Buku (Hanya Admin)
 
 ```http
 POST http://localhost:3000/api/books
@@ -186,7 +186,7 @@ Content-Type: application/json
 }
 ```
 
-#### Borrow a Book
+#### Meminjam Buku
 
 ```http
 POST http://localhost:3000/api/borrowings/borrow
@@ -201,6 +201,7 @@ Content-Type: application/json
 
 ## Troubleshooting
 
-- **MongoDB Connection Issues**: Ensure MongoDB is running and accessible at the URI specified in your .env files.
-- **Port Conflicts**: If ports are already in use, you can modify the PORT variable in the .env files.
-- **JWT Authentication Issues**: Make sure you're using a valid JWT token in your Authorization header for protected routes.
+- **Masalah Koneksi MongoDB**: Pastikan MongoDB berjalan dan dapat diakses pada URI yang ditentukan dalam file .env Anda.
+- **Konflik Port**: Jika port sudah digunakan, Anda dapat mengubah variabel PORT di file .env.
+- **Masalah Autentikasi JWT**: Pastikan Anda menggunakan token JWT yang valid di header Authorization untuk rute yang dilindungi.
+

@@ -1,52 +1,52 @@
 # Monolith vs Microservices Comparison
 
-This document compares the monolithic and microservices architectures for the Library Management System.
+Dokumen ini membandingkan arsitektur monolitik dan microservices untuk Sistem Manajemen Perpustakaan.
 
 ## Architecture Comparison
 
 ### Monolithic Architecture
 
-- **Codebase**: Single codebase containing all features
-- **Deployment**: Deployed as a single unit
-- **Database**: Single shared database
-- **Scaling**: Entire application must be scaled together
-- **Development**: Simple to develop and test initially
-- **Communication**: Function calls within the application
+- **Codebase**: Basis kode tunggal yang berisi semua fitur
+- **Deployment**: Diterapkan sebagai satu kesatuan
+- **Database**: Basis data tunggal yang dibagi
+- **Scaling**: Seluruh aplikasi harus diskalakan bersama
+- **Development**: Sederhana untuk dikembangkan dan diuji pada awalnya
+- **Communication**: Panggilan fungsi dalam aplikasi
 
 ### Microservices Architecture
 
-- **Codebase**: Multiple small codebases, each for a specific domain
-- **Deployment**: Each service can be deployed independently
-- **Database**: Separate database for each service (database per service pattern)
-- **Scaling**: Services can be scaled independently based on demand
-- **Development**: More complex initial setup, but easier to maintain over time
-- **Communication**: HTTP/REST API calls between services
+- **Codebase**: Beberapa basis kode kecil, masing-masing untuk domain tertentu
+- **Deployment**: Setiap layanan dapat diterapkan secara independen
+- **Database**: Basis data terpisah untuk setiap layanan (pola database per layanan)
+- **Scaling**: Layanan dapat diskalakan secara independen berdasarkan permintaan
+- **Development**: Pengaturan awal lebih kompleks, tetapi lebih mudah dikelola seiring waktu
+- **Communication**: Panggilan API HTTP/REST antar layanan
 
 ## Migration Process
 
-The migration from monolithic to microservices architecture followed these steps:
+Migrasi dari arsitektur monolitik ke microservices mengikuti langkah-langkah berikut:
 
-### 1. Planning the Migration (Chapter 2)
+### 1. Perencanaan Migrasi (Bab 2)
 
-- Identified bounded contexts (User, Book, Borrowing)
-- Mapped out service dependencies
-- Planned the API gateway as entry point
+- Mengidentifikasi konteks terikat (Pengguna, Buku, Peminjaman)
+- Memetakan ketergantungan layanan
+- Merencanakan gateway API sebagai titik masuk
 
-### 2. Splitting the Monolith (Chapter 3)
+### 2. Memecah Monolith (Bab 3)
 
-- Created independent services based on domain boundaries
-- Implemented an API gateway to route requests
-- Established inter-service communication
+- Membuat layanan independen berdasarkan batas domain
+- Mengimplementasikan gateway API untuk mengarahkan permintaan
+- Membangun komunikasi antar layanan
 
-### 3. Decomposing the Database (Chapter 4)
+### 3. Menguraikan Database (Bab 4)
 
-- Created separate databases for each service
-- Used database per service pattern
-- Implemented data duplication where necessary for performance (denormalization)
+- Membuat basis data terpisah untuk setiap layanan
+- Menggunakan pola database per layanan
+- Mengimplementasikan duplikasi data jika diperlukan untuk kinerja (denormalisasi)
 
 ## Code Structure Changes
 
-### Before (Monolithic)
+### Sebelum (Monolitik)
 
 ```
 library-monolith/
@@ -65,7 +65,7 @@ library-monolith/
 └── app.js
 ```
 
-### After (Microservices)
+### Setelah (Microservices)
 
 ```
 library-microservices/
@@ -90,30 +90,31 @@ library-microservices/
 
 ## Benefits and Drawbacks
 
-### Benefits of Microservices
+### Keuntungan Microservices
 
-1. **Independent Scaling**: Each service can be scaled based on its specific needs
-2. **Technology Flexibility**: Different services can use different technologies
-3. **Team Autonomy**: Teams can work independently on different services
-4. **Fault Isolation**: A failure in one service doesn't necessarily affect others
-5. **Deployment Flexibility**: Services can be updated independently
+1. **Penskalaan Independen**: Setiap layanan dapat diskalakan berdasarkan kebutuhan spesifiknya
+2. **Fleksibilitas Teknologi**: Layanan berbeda dapat menggunakan teknologi yang berbeda
+3. **Otonomi Tim**: Tim dapat bekerja secara independen pada layanan yang berbeda
+4. **Isolasi Kesalahan**: Kegagalan pada satu layanan tidak selalu mempengaruhi yang lain
+5. **Fleksibilitas Deployment**: Layanan dapat diperbarui secara independen
 
-### Drawbacks of Microservices
+### Kekurangan Microservices
 
-1. **Increased Complexity**: More moving parts to manage
-2. **Network Latency**: Inter-service communication adds overhead
-3. **Data Consistency**: Maintaining consistency across services is challenging
-4. **Development Setup**: More complex local development environment
-5. **Testing**: End-to-end testing is more difficult
+1. **Peningkatan Kompleksitas**: Lebih banyak bagian yang harus dikelola
+2. **Latensi Jaringan**: Komunikasi antar layanan menambah overhead
+3. **Konsistensi Data**: Mempertahankan konsistensi antar layanan menjadi tantangan
+4. **Pengaturan Pengembangan**: Lingkungan pengembangan lokal lebih kompleks
+5. **Pengujian**: Pengujian end-to-end lebih sulit
 
-## Conclusion
+## Kesimpulan
 
-The migration from a monolithic to a microservices architecture demonstrates both advantages and challenges. While the microservices approach provides better scalability and maintainability for larger applications, it comes with increased complexity and operational overhead.
+Migrasi dari arsitektur monolitik ke microservices menunjukkan baik keuntungan maupun tantangan. Sementara pendekatan microservices menyediakan skalabilitas dan pemeliharaan yang lebih baik untuk aplikasi yang lebih besar, namun membawa peningkatan kompleksitas dan overhead operasional.
 
-For this library system, the microservices approach particularly benefits:
+Untuk sistem perpustakaan ini, pendekatan microservices khususnya menguntungkan dalam:
 
-1. Scaling the book service independently during peak search times
-2. Allowing separate teams to work on user management and borrowing features
-3. Updating the borrowing rules without affecting other parts of the system
+1. Menskalakan layanan buku secara independen selama waktu pencarian puncak
+2. Memungkinkan tim terpisah untuk bekerja pada fitur manajemen pengguna dan peminjaman
+3. Memperbarui aturan peminjaman tanpa mempengaruhi bagian sistem lainnya
 
-However, for smaller applications or teams, the monolithic approach might still be more practical due to its simplicity and lower operational overhead.
+Namun, untuk aplikasi atau tim yang lebih kecil, pendekatan monolitik mungkin masih lebih praktis karena kesederhanaan dan overhead operasional yang lebih rendah.
+
