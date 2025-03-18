@@ -1,39 +1,39 @@
 # Library Management System - Monolithic Architecture
 
-This project demonstrates a library management system using a monolithic architecture. All features and components are implemented within a single application.
+Proyek ini mendemonstrasikan sistem manajemen perpustakaan menggunakan arsitektur monolitik. Semua fitur dan komponen diimplementasikan dalam satu aplikasi.
 
-## Features
+## Fitur
 
-- User authentication (register, login)
-- Book management (add, update, delete, search)
-- Borrowing system (borrow, return, check history)
+- Autentikasi pengguna (registrasi, login)
+- Manajemen buku (tambah, perbarui, hapus, cari)
+- Sistem peminjaman (pinjam, kembalikan, cek riwayat)
 
-## Architecture
+## Arsitektur
 
-This application follows a traditional monolithic architecture where all components are tightly coupled within a single Node.js application:
+Aplikasi ini mengikuti arsitektur monolitik tradisional dimana semua komponen terhubung erat dalam satu aplikasi Node.js:
 
-- Database: MongoDB (single database)
+- Database: MongoDB (database tunggal)
 - Backend: Express.js
-- Authentication: JWT-based
-- Models: User, Book, Borrowing
+- Autentikasi: Berbasis JWT
+- Model: User, Book, Borrowing
 
-## Getting Started
+## Memulai
 
-### Prerequisites
+### Prasyarat
 
 - Node.js
 - MongoDB
 
-### Installation
+### Instalasi
 
-1. Clone the repository
-2. Install dependencies:
+1. Klon repositori
+2. Instal dependensi:
 
 ```
 npm install
 ```
 
-3. Create a .env file with the following:
+3. Buat file .env dengan isi berikut:
 
 ```
 PORT=3000
@@ -41,37 +41,38 @@ MONGO_URI=mongodb://localhost:27017/library-monolith
 JWT_SECRET=your_jwt_secret_key
 ```
 
-4. Start MongoDB:
+4. Jalankan MongoDB:
 
 ```
 mongod
 ```
 
-5. Start the application:
+5. Jalankan aplikasi:
 
 ```
 npm run dev
 ```
 
-## API Endpoints
+## Endpoint API
 
-### Users
+### Pengguna
 
-- POST /api/users/register - Register a new user
-- POST /api/users/login - Login user
-- GET /api/users/me - Get current user profile
+- POST /api/users/register - Registrasi pengguna baru
+- POST /api/users/login - Login pengguna
+- GET /api/users/me - Dapatkan profil pengguna saat ini
 
-### Books
+### Buku
 
-- GET /api/books - Get all books
-- GET /api/books/:id - Get book by ID
-- POST /api/books - Add a new book (admin only)
-- PUT /api/books/:id - Update a book (admin only)
-- DELETE /api/books/:id - Delete a book (admin only)
+- GET /api/books - Dapatkan semua buku
+- GET /api/books/:id - Dapatkan buku berdasarkan ID
+- POST /api/books - Tambah buku baru (khusus admin)
+- PUT /api/books/:id - Perbarui buku (khusus admin)
+- DELETE /api/books/:id - Hapus buku (khusus admin)
 
-### Borrowings
+### Peminjaman
 
-- POST /api/borrowings/borrow - Borrow a book
-- PUT /api/borrowings/return/:borrowingId - Return a book
-- GET /api/borrowings/me - Get current user's borrowings
-- GET /api/borrowings - Get all borrowings (admin only)
+- POST /api/borrowings/borrow - Pinjam buku
+- PUT /api/borrowings/return/:borrowingId - Kembalikan buku
+- GET /api/borrowings/me - Dapatkan peminjaman pengguna saat ini
+- GET /api/borrowings - Dapatkan semua peminjaman (khusus admin)
+

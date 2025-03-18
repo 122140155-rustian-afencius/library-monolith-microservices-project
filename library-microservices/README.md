@@ -1,33 +1,33 @@
 # Library Management System - Microservices Architecture
 
-This project demonstrates a library management system using microservices architecture. It is divided into multiple services that work together to provide the same functionality as the monolithic version.
+Proyek ini mendemonstrasikan sistem manajemen perpustakaan menggunakan arsitektur microservices. Sistem ini dibagi menjadi beberapa layanan yang bekerja sama untuk menyediakan fungsionalitas yang sama seperti versi monolitik.
 
-## Services
+## Layanan
 
-1. **API Gateway** - Entry point for all client requests, handles routing to appropriate services
-2. **User Service** - Manages user authentication and profiles
-3. **Book Service** - Manages book inventory
-4. **Borrowing Service** - Manages book borrowing and returning
+1. **API Gateway** - Titik masuk untuk semua permintaan klien, menangani routing ke layanan yang sesuai
+2. **User Service** - Mengelola autentikasi dan profil pengguna
+3. **Book Service** - Mengelola inventaris buku
+4. **Borrowing Service** - Mengelola peminjaman dan pengembalian buku
 
-## Architecture
+## Arsitektur
 
 ```
-Client → API Gateway → User/Book/Borrowing Services → MongoDB (separate databases)
+Client → API Gateway → User/Book/Borrowing Services → MongoDB (basis data terpisah)
 ```
 
-## Getting Started
+## Memulai
 
-### Prerequisites
+### Prasyarat
 
 - Node.js
 - MongoDB
-- Docker (optional)
+- Docker (opsional)
 
-### Running the Application
+### Menjalankan Aplikasi
 
-#### Without Docker:
+#### Tanpa Docker:
 
-1. Install dependencies for each service:
+1. Instal dependensi untuk setiap layanan:
 
 ```
 cd api-gateway && npm install
@@ -36,13 +36,13 @@ cd ../book-service && npm install
 cd ../borrowing-service && npm install
 ```
 
-2. Start MongoDB:
+2. Jalankan MongoDB:
 
 ```
 mongod
 ```
 
-3. Start each service (in separate terminals):
+3. Jalankan setiap layanan (di terminal terpisah):
 
 ```
 cd api-gateway && npm run dev
@@ -51,31 +51,32 @@ cd book-service && npm run dev
 cd borrowing-service && npm run dev
 ```
 
-#### With Docker:
+#### Dengan Docker:
 
 ```
 docker-compose up
 ```
 
-## API Endpoints
+## Endpoint API
 
-### Users
+### Pengguna
 
-- POST /api/users/register - Register a new user
-- POST /api/users/login - Login user
-- GET /api/users/me - Get current user profile
+- POST /api/users/register - Mendaftarkan pengguna baru
+- POST /api/users/login - Login pengguna
+- GET /api/users/me - Mendapatkan profil pengguna saat ini
 
-### Books
+### Buku
 
-- GET /api/books - Get all books
-- GET /api/books/:id - Get book by ID
-- POST /api/books - Add a new book (admin only)
-- PUT /api/books/:id - Update a book (admin only)
-- DELETE /api/books/:id - Delete a book (admin only)
+- GET /api/books - Mendapatkan semua buku
+- GET /api/books/:id - Mendapatkan buku berdasarkan ID
+- POST /api/books - Menambahkan buku baru (khusus admin)
+- PUT /api/books/:id - Memperbarui buku (khusus admin)
+- DELETE /api/books/:id - Menghapus buku (khusus admin)
 
-### Borrowings
+### Peminjaman
 
-- POST /api/borrowings/borrow - Borrow a book
-- PUT /api/borrowings/return/:borrowingId - Return a book
-- GET /api/borrowings/me - Get current user's borrowings
-- GET /api/borrowings - Get all borrowings (admin only)
+- POST /api/borrowings/borrow - Meminjam buku
+- PUT /api/borrowings/return/:borrowingId - Mengembalikan buku
+- GET /api/borrowings/me - Mendapatkan daftar peminjaman pengguna saat ini
+- GET /api/borrowings - Mendapatkan semua peminjaman (khusus admin)
+
