@@ -1,50 +1,50 @@
 # Library Management System - Monolith to Microservices Migration
 
-This repository demonstrates the migration of a library management system from a monolithic architecture to microservices, following the patterns described in "Evolutionary Patterns to Transform Your Monolith".
+Repository ini mendemonstrasikan migrasi sistem manajemen perpustakaan dari arsitektur monolitik ke microservices, mengikuti pola yang dijelaskan dalam "Evolutionary Patterns to Transform Your Monolith".
 
-## Repository Structure
+## Struktur Repository
 
-This repository contains two versions of the same application:
+Repository ini berisi dua versi aplikasi yang sama:
 
-1. **Monolithic Architecture** (`library-monolith/`)
-2. **Microservices Architecture** (`library-microservices/`)
+1. **Arsitektur Monolitik** (`library-monolith/`)
+2. **Arsitektur Microservices** (`library-microservices/`)
 
-Both implementations provide the same functionality but with different architectural approaches.
+Kedua implementasi menyediakan fungsionalitas yang sama tetapi dengan pendekatan arsitektur yang berbeda.
 
-## Features
+## Fitur
 
-- User authentication and authorization (regular users and admins)
-- Book management (adding, updating, searching)
-- Borrowing system (borrowing books, returning, managing fines)
+- Autentikasi dan autorisasi pengguna (pengguna biasa dan admin)
+- Manajemen buku (menambah, memperbarui, mencari)
+- Sistem peminjaman (meminjam buku, mengembalikan, mengelola denda)
 
-## Microservices Migration
+## Migrasi Microservices
 
-The migration process followed these key chapters from "Evolutionary Patterns to Transform Your Monolith":
+Proses migrasi mengikuti bab-bab utama dari "Evolutionary Patterns to Transform Your Monolith":
 
-### Chapter 2: Planning a Migration
+### Chapter 2: Perencanaan Migrasi
 
-- Analyzing the monolithic codebase
-- Identifying bounded contexts
-- Defining service boundaries
-- Creating migration strategy
+- Menganalisis kode monolitik
+- Mengidentifikasi konteks terikat
+- Menentukan batasan layanan
+- Membuat strategi migrasi
 
-### Chapter 3: Splitting The Monolith
+### Chapter 3: Memisahkan Monolith
 
-- Creating API Gateway as entry point
-- Extracting services based on domain boundaries
-- Implementing service-to-service communication
+- Membuat API Gateway sebagai titik masuk
+- Mengekstrak layanan berdasarkan batasan domain
+- Mengimplementasikan komunikasi antar layanan
 
-### Chapter 4: Decomposing The Database
+### Chapter 4: Menguraikan Database
 
-- Database per service pattern implementation
-- Data duplication and denormalization strategies
-- Maintaining data consistency across services
+- Implementasi pola database per layanan
+- Strategi duplikasi dan denormalisasi data
+- Mempertahankan konsistensi data antar layanan
 
-For detailed comparison between the two architectural approaches, see the [comparison document](comparison.md).
+Untuk perbandingan detail antara kedua pendekatan arsitektur, lihat [dokumen perbandingan](comparison.md).
 
-## Running the Applications
+## Menjalankan Aplikasi
 
-### Monolithic Version
+### Versi Monolitik
 
 ```bash
 cd library-monolith
@@ -52,16 +52,16 @@ npm install
 npm run dev
 ```
 
-### Microservices Version
+### Versi Microservices
 
-Using Docker:
+Menggunakan Docker:
 
 ```bash
 cd library-microservices
 docker-compose up
 ```
 
-Or running each service individually:
+Atau menjalankan setiap layanan secara individual:
 
 ```bash
 # Terminal 1: API Gateway
@@ -85,12 +85,13 @@ npm install
 npm run dev
 ```
 
-## API Documentation
+## Dokumentasi API
 
-Both versions expose the same API endpoints:
+Kedua versi mengekspos endpoint API yang sama:
 
-- **Users**: Registration, login, profile management
-- **Books**: Browse, search, add, update, delete books
-- **Borrowings**: Borrow books, return, check borrowing history
+- **Pengguna**: Registrasi, login, manajemen profil
+- **Buku**: Menjelajah, mencari, menambah, memperbarui, menghapus buku
+- **Peminjaman**: Meminjam buku, mengembalikan, memeriksa riwayat peminjaman
 
-See the README files in each project folder for detailed API documentation.
+Lihat file README di setiap folder proyek untuk dokumentasi API yang detail.
+
