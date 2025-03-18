@@ -1,0 +1,69 @@
+version: "3"
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - library-network
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - JWT_SECRET=your_jwt_secret_key
+      - USER_SERVICE_URL=http://user-service:3001
+      - BOOK_SERVICE_URL=http://book-service:3002
+      - BORROWING_SERVICE_URL=http://borrowing-service:3003
+    depends_on:
+      - user-service
+      - book-service
+      - borrowing-service
+    networks:
+      - library-network
+
+  user-service:
+    build: ./user-service
+    environment:
+      - PORT=3001
+      - MONGO_URI=mongodb://mongodb:27017/library-users
+      - JWT_SECRET=your_jwt_secret_key
+    depends_on:
+      - mongodb
+    networks:
+      - library-network
+
+  book-service:
+    build: ./book-service
+    environment:
+      - PORT=3002
+      - MONGO_URI=mongodb://mongodb:27017/library-books
+    depends_on:
+      - mongodb
+    networks:
+      - library-network
+
+  borrowing-service:
+    build: ./borrowing-service
+    environment:
+      - PORT=3003
+      - MONGO_URI=mongodb://mongodb:27017/library-borrowings
+      - BOOK_SERVICE_URL=http://book-service:3002
+      - USER_SERVICE_URL=http://user-service:3001
+    depends_on:
+      - mongodb
+      - book-service
+      - user-service
+    networks:
+      - library-network
+
+networks:
+  library-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
