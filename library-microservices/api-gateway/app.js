@@ -29,7 +29,12 @@ const authenticate = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret");
-    req.user = decoded;
+    req.user = {
+      id: decoded.id,
+      role: decoded.role,
+      name: decoded.name,
+      email: decoded.email,
+    };
     next();
   } catch (error) {
     return res.status(401).json({
@@ -51,8 +56,19 @@ app.use(
       "^/api/users": "/",
     },
     onProxyReq: (proxyReq, req) => {
+      // Add user data header if available
       if (req.user) {
         proxyReq.setHeader("user-data", JSON.stringify(req.user));
+      }
+
+      // Handle JSON body for POST/PUT/PATCH requests
+      if (["POST", "PUT", "PATCH"].includes(req.method) && req.body) {
+        const bodyData = JSON.stringify(req.body);
+        // Update content length and type
+        proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
+        proxyReq.setHeader("Content-Type", "application/json");
+        // Write body data to the proxied request
+        proxyReq.write(bodyData);
       }
     },
   })
@@ -71,6 +87,14 @@ app.use(
       if (req.user) {
         proxyReq.setHeader("user-data", JSON.stringify(req.user));
       }
+
+      // Handle JSON body for POST/PUT/PATCH requests
+      if (["POST", "PUT", "PATCH"].includes(req.method) && req.body) {
+        const bodyData = JSON.stringify(req.body);
+        proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
+        proxyReq.setHeader("Content-Type", "application/json");
+        proxyReq.write(bodyData);
+      }
     },
   })
 );
@@ -87,6 +111,14 @@ app.use(
     onProxyReq: (proxyReq, req) => {
       if (req.user) {
         proxyReq.setHeader("user-data", JSON.stringify(req.user));
+      }
+
+      // Handle JSON body for POST/PUT/PATCH requests
+      if (["POST", "PUT", "PATCH"].includes(req.method) && req.body) {
+        const bodyData = JSON.stringify(req.body);
+        proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
+        proxyReq.setHeader("Content-Type", "application/json");
+        proxyReq.write(bodyData);
       }
     },
   })

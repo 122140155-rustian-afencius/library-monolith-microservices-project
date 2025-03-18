@@ -8,6 +8,11 @@ services:
       - mongodb_data:/data/db
     networks:
       - library-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   api-gateway:
     build: ./api-gateway
@@ -33,7 +38,8 @@ services:
       - MONGO_URI=mongodb://mongodb:27017/library-users
       - JWT_SECRET=your_jwt_secret_key
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
     networks:
       - library-network
 
@@ -43,7 +49,8 @@ services:
       - PORT=3002
       - MONGO_URI=mongodb://mongodb:27017/library-books
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
     networks:
       - library-network
 

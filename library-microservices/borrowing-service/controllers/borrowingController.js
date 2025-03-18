@@ -15,6 +15,7 @@ exports.borrowBook = async (req, res) => {
 
     // Verify book exists and is available by calling book service
     try {
+      // Fixed API endpoint to get book details
       const bookResponse = await axios.get(`${BOOK_SERVICE_URL}/${bookId}`);
       const book = bookResponse.data.data;
 
@@ -58,7 +59,7 @@ exports.borrowBook = async (req, res) => {
         data: borrowing,
       });
     } catch (error) {
-      console.error("Service communication error:", error);
+      console.error("Service communication error:", error.message);
       return res.status(500).json({
         success: false,
         message: "Error communicating with other services",

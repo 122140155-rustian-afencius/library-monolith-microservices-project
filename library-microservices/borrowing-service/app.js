@@ -17,6 +17,7 @@ app.use((req, res, next) => {
   if (userData) {
     try {
       req.user = JSON.parse(userData);
+      console.log("User data extracted in borrowing service:", req.user);
     } catch (error) {
       console.error("Error parsing user data:", error);
     }

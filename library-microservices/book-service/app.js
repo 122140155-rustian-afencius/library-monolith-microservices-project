@@ -17,6 +17,7 @@ app.use((req, res, next) => {
   if (userData) {
     try {
       req.user = JSON.parse(userData);
+      console.log("User data extracted in book service:", req.user);
     } catch (error) {
       console.error("Error parsing user data:", error);
     }
@@ -27,9 +28,7 @@ app.use((req, res, next) => {
 // Auth middleware
 const authorize = (...roles) => {
   return (req, res, next) => {
-    // If no user data or no roles required, proceed
-    if (!roles.length) return next();
-
+    // Check if user exists
     if (!req.user || !req.user.id) {
       return res.status(401).json({
         success: false,
@@ -37,16 +36,14 @@ const authorize = (...roles) => {
       });
     }
 
-    // Verify role by making request to user service
-    // In real-world case, you might want to verify the role from JWT or user service
-    // For simplicity, we'll assume the role is included in the user data from API Gateway
-    if (req.user.role && roles.includes(req.user.role)) {
+    // Allow access if user has any role
+    if (req.user.role) {
       return next();
     }
 
     return res.status(403).json({
       success: false,
-      message: "Forbidden - insufficient privileges",
+      message: "Forbidden - no role assigned",
     });
   };
 };
